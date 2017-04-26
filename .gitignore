@@ -1,0 +1,3 @@
+buildroot/
+output/
+beaglebone_external/package/vpbus*

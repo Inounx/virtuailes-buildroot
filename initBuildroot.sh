@@ -24,7 +24,6 @@ mkdir $SCRIPT_PATH/output
 
 echo "Configuring buildroot..."
 make -C $SCRIPT_PATH/buildroot \
-     -O $SCRIPT_PATH/output \
      BR2_EXTERNAL=$SCRIPT_PATH/beaglebone_external \
      virtuailes_beaglebone_defconfig
 
