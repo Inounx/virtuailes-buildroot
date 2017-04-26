@@ -1,0 +1,5 @@
+menu "VirtuAiles"
+	source "$BR2_EXTERNAL/package/vpbus/Config.in"
+    source "$BR2_EXTERNAL/package/vpbus_gpiolib/Config.in"
+	source "$BR2_EXTERNAL/package/vpbus_test/Config.in"
+endmenu
