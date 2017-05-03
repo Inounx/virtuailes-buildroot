@@ -94,3 +94,7 @@
 &rtc {
 	system-power-controller;
 };
+
+#include "am335x-boneblack-vpbus.dtsi"
+#include "am335x-bone-emmc-in-reset.dtsi"
+
