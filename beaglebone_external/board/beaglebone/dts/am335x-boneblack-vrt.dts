@@ -25,72 +25,6 @@
 	vmmc-supply = <&vmmcsd_fixed>;
 };
 
-/*&mmc2 {
-	vmmc-supply = <&vmmcsd_fixed>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&emmc_pins>;
-	bus-width = <8>;
-	status = "okay";
-};*/
-
-&am33xx_pinmux {
-	nxp_hdmi_bonelt_pins: nxp_hdmi_bonelt_pins {
-		pinctrl-single,pins = <
-			AM33XX_IOPAD(0x9b0, PIN_OUTPUT_PULLDOWN | MUX_MODE3)	/* xdma_event_intr0 */
-			AM33XX_IOPAD(0x8a0, PIN_OUTPUT | MUX_MODE0)		/* lcd_data0.lcd_data0 */
-			AM33XX_IOPAD(0x8a4, PIN_OUTPUT | MUX_MODE0)		/* lcd_data1.lcd_data1 */
-			AM33XX_IOPAD(0x8a8, PIN_OUTPUT | MUX_MODE0)		/* lcd_data2.lcd_data2 */
-			AM33XX_IOPAD(0x8ac, PIN_OUTPUT | MUX_MODE0)		/* lcd_data3.lcd_data3 */
-			AM33XX_IOPAD(0x8b0, PIN_OUTPUT | MUX_MODE0)		/* lcd_data4.lcd_data4 */
-			AM33XX_IOPAD(0x8b4, PIN_OUTPUT | MUX_MODE0)		/* lcd_data5.lcd_data5 */
-			AM33XX_IOPAD(0x8b8, PIN_OUTPUT | MUX_MODE0)		/* lcd_data6.lcd_data6 */
-			AM33XX_IOPAD(0x8bc, PIN_OUTPUT | MUX_MODE0)		/* lcd_data7.lcd_data7 */
-			AM33XX_IOPAD(0x8c0, PIN_OUTPUT | MUX_MODE0)		/* lcd_data8.lcd_data8 */
-			AM33XX_IOPAD(0x8c4, PIN_OUTPUT | MUX_MODE0)		/* lcd_data9.lcd_data9 */
-			AM33XX_IOPAD(0x8c8, PIN_OUTPUT | MUX_MODE0)		/* lcd_data10.lcd_data10 */
-			AM33XX_IOPAD(0x8cc, PIN_OUTPUT | MUX_MODE0)		/* lcd_data11.lcd_data11 */
-			AM33XX_IOPAD(0x8d0, PIN_OUTPUT | MUX_MODE0)		/* lcd_data12.lcd_data12 */
-			AM33XX_IOPAD(0x8d4, PIN_OUTPUT | MUX_MODE0)		/* lcd_data13.lcd_data13 */
-			AM33XX_IOPAD(0x8d8, PIN_OUTPUT | MUX_MODE0)		/* lcd_data14.lcd_data14 */
-			AM33XX_IOPAD(0x8dc, PIN_OUTPUT | MUX_MODE0)		/* lcd_data15.lcd_data15 */
-			AM33XX_IOPAD(0x8e0, PIN_OUTPUT_PULLDOWN | MUX_MODE0)	/* lcd_vsync.lcd_vsync */
-			AM33XX_IOPAD(0x8e4, PIN_OUTPUT_PULLDOWN | MUX_MODE0)	/* lcd_hsync.lcd_hsync */
-			AM33XX_IOPAD(0x8e8, PIN_OUTPUT_PULLDOWN | MUX_MODE0)	/* lcd_pclk.lcd_pclk */
-			AM33XX_IOPAD(0x8ec, PIN_OUTPUT_PULLDOWN | MUX_MODE0)	/* lcd_ac_bias_en.lcd_ac_bias_en */
-		>;
-	};
-	nxp_hdmi_bonelt_off_pins: nxp_hdmi_bonelt_off_pins {
-		pinctrl-single,pins = <
-			AM33XX_IOPAD(0x9b0, PIN_OUTPUT_PULLDOWN | MUX_MODE3)	/* xdma_event_intr0 */
-		>;
-	};
-};
-
-/*&lcdc {
-	status = "okay";
-	port {
-		lcdc_0: endpoint@0 {
-			remote-endpoint = <&hdmi_0>;
-		};
-	};
-};*/
-
-/*&i2c0 {
-	tda19988 {
-		compatible = "nxp,tda998x";
-		reg = <0x70>;
-		pinctrl-names = "default", "off";
-		pinctrl-0 = <&nxp_hdmi_bonelt_pins>;
-		pinctrl-1 = <&nxp_hdmi_bonelt_off_pins>;
-
-		port {
-			hdmi_0: endpoint@0 {
-				remote-endpoint = <&lcdc_0>;
-			};
-		};
-	};
-};*/
-
 &rtc {
 	system-power-controller;
 };
@@ -109,105 +43,146 @@
 };
 
 /* --------------------------------------------------------------------------- */
-/*                          Config GPMC pour VPBUS                             */
+/*                          Config GPIO pour VPBUS                             */
 /* --------------------------------------------------------------------------- */
 
 &am33xx_pinmux {
-	gpmc_pins: pinmux_gpmc_pins {
-		pinctrl-single,pins = <
-			AM33XX_IOPAD(0x800, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad0.gpmc_ad0 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x804, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad1.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x808, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad2.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x80C, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad3.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x810, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad4.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x814, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad5.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x818, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad6.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x81C, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad7.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x820, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad8.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x824, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad9.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x828, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad10.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x82C, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad11.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x830, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad12.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x834, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad13.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x838, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad14.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x83C, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad15.gpmc_ad1 MODE0 | INPUT | PULLUP */
-			AM33XX_IOPAD(0x880, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_cscn1.gpmc_cscn1 MODE0 | OUTPUT */
-			AM33XX_IOPAD(0x88C, PIN_INPUT 		 | MUX_MODE0)	/* gpmc_clk.gpmc_clk MODE0 | INPUT */
-			AM33XX_IOPAD(0x890, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_advn_ale.gpmc_advn_ale MODE0 | OUTPUT */
-			AM33XX_IOPAD(0x894, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_oen_ren.gpmc_oen_ren MODE0 | OUTPUT */
-			AM33XX_IOPAD(0x898, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_wen.gpmc_wen MODE0 | OUTPUT */
-			AM33XX_IOPAD(0x89C, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_ben0_cle.gpmc_ben0_cle MODE0 | OUTPUT */
-			AM33XX_IOPAD(0x878, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_ben1_cle.gpmc_ben1_cle MODE0 | OUTPUT */
-		>;
-	};
+    gpio_pins: pinmux_gpio_pins {
+        pinctrl-single,pins = <
+            AM33XX_IOPAD(0x830, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD0 */
+            AM33XX_IOPAD(0x834, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD1*/
+            AM33XX_IOPAD(0x838, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD2*/
+            AM33XX_IOPAD(0x83C, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD3*/
+            AM33XX_IOPAD(0x840, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD4*/
+            AM33XX_IOPAD(0x844, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD5*/
+            AM33XX_IOPAD(0x848, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD6*/
+            AM33XX_IOPAD(0x84C, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD7*/
+            AM33XX_IOPAD(0x990, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD8*/
+            AM33XX_IOPAD(0x994, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD9*/
+            AM33XX_IOPAD(0x998, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD10*/
+            AM33XX_IOPAD(0x99C, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD11*/
+            AM33XX_IOPAD(0x9A0, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD12*/
+            AM33XX_IOPAD(0x9A4, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD13*/
+            AM33XX_IOPAD(0x9A8, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD14*/
+            AM33XX_IOPAD(0x9AC, PIN_INPUT_PULLUP | MUX_MODE7)	/* AD15*/
+            AM33XX_IOPAD(0x890, PIN_INPUT_PULLUP | MUX_MODE7)	/* ALE */
+            AM33XX_IOPAD(0x894, PIN_INPUT_PULLUP | MUX_MODE7)	/* READ */
+            AM33XX_IOPAD(0x898, PIN_INPUT_PULLUP | MUX_MODE7)	/* WRITE */
+        >;
+    };
 };
 
-&gpmc {
-	status = "okay";
-	#address-cells = <2>;
-	#size-cells = <1>;
-
-	pinctrl-names = "default";
-	pinctrl-0 = <&gpmc_pins>;
-
-	/* chip select ranges */
-	ranges = <1 0 0x01000000 0x1000000>;
-
-	nor {
-		compatible = "vpbus";
-		status = "okay";
-		/*pinctrl-names = "default";*/
-		/*pinctrl-0 = <&fpga_config_pins>;*/
-
-		/*reset = <&rstctl 0 0>;*/ /* uncomment for use under Kernel 3.8.13 */
-		/*reset-names = "eMMC_RSTn-LOGIBONE";*/ /* uncomment for use under Kernel 3.8.13 */
-
-		reg = <1 0 0x01000000>;			/*CSn1*/
-
-		/* CONFIG1 */
-		bank-width = <2>;			/* GPMC_CONFIG1_DEVICESIZE(1) */
-		/*gpmc,burst-write;*/
-		gpmc,burst-read;
-		gpmc,burst-wrap;
-		gpmc,sync-read;				/* GPMC_CONFIG1_READTYPE_ASYNC */
-		gpmc,sync-write;			/* GPMC_CONFIG1_WRITETYPE_ASYNC */
-		gpmc,clk-activation-ns = <0>;		/* GPMC_CONFIG1_CLKACTIVATIONTIME(2) */
-		gpmc,burst-length = <16>;		/* GPMC_CONFIG1_PAGE_LEN(2) */
-		gpmc,mux-add-data = <2>;		/* GPMC_CONFIG1_MUXTYPE(2) */
-
-		/* CONFIG2 */
-		gpmc,sync-clk-ps = <20000>;
-		gpmc,cs-on-ns = <0>;
-		gpmc,cs-rd-off-ns = <100>;
-		gpmc,cs-wr-off-ns = <40>;
-
-		/* CONFIG3 */
-		gpmc,adv-on-ns = <0>;
-		gpmc,adv-rd-off-ns = <20>;
-		gpmc,adv-wr-off-ns = <20>;
-
-		/* CONFIG4 */
-		gpmc,we-on-ns = <20>;
-		gpmc,we-off-ns = <40>;
-		gpmc,oe-on-ns = <20>;
-		gpmc,oe-off-ns = <100>;
-
-		/* CONFIG 5 */
-		gpmc,page-burst-access-ns = <20>;
-		gpmc,access-ns = <80>;
-		gpmc,rd-cycle-ns = <120>;
-		gpmc,wr-cycle-ns = <60>;
-
-		/* CONFIG 6 */
-		gpmc,wr-access-ns = <40>;
-		gpmc,wr-data-mux-bus-ns = <20>;
-		/*gpmc,bus-turnaround-ns = <40>;*/	/* CONFIG6:3:0 = 4 */
-		/*gpmc,cycle2cycle-samecsen;*/		/* CONFIG6:7 = 1 */
-		/*gpmc,cycle2cycle-delay-ns = <40>;*/	/* CONFIG6:11:8 = 4 */
-
-		/* not using dma engine yet, but we can get the channel number here */
-		dmas = <&edma 20>;
-		dma-names = "vpbus";
-	};
+/{
+    test {
+        vpbus_gpio: vpbus {
+            compatible="vpbus";
+            pinctrl-names = "default";
+            pinctrl-0 = <&gpio_pins>;
+            status = "okay";
+        };
+    };
 };
+
+/* --------------------------------------------------------------------------- */
+/*                          Config GPMC pour VPBUS                             */
+/* --------------------------------------------------------------------------- */
+
+//&am33xx_pinmux {
+//	gpmc_pins: pinmux_gpmc_pins {
+//		pinctrl-single,pins = <
+//			AM33XX_IOPAD(0x800, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad0 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x804, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad1 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x808, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad2 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x80C, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad3 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x810, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad4 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x814, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad5 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x818, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad6 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x81C, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad7 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x820, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad8 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x824, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad9 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x828, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad10 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x82C, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad11 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x830, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad12 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x834, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad13 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x838, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad14 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x83C, PIN_INPUT_PULLUP | MUX_MODE0)	/* gpmc_ad15 MODE0 | INPUT | PULLUP */
+//			AM33XX_IOPAD(0x880, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_cscn1 MODE0 | OUTPUT */
+//			AM33XX_IOPAD(0x88C, PIN_INPUT 		 | MUX_MODE0)	/* gpmc_clk MODE0 | INPUT */
+//			AM33XX_IOPAD(0x890, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_advn_ale MODE0 | OUTPUT */
+//			AM33XX_IOPAD(0x894, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_oen_ren MODE0 | OUTPUT */
+//			AM33XX_IOPAD(0x898, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_wen MODE0 | OUTPUT */
+//			AM33XX_IOPAD(0x89C, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_ben0_cle MODE0 | OUTPUT */
+//			AM33XX_IOPAD(0x878, PIN_OUTPUT 		 | MUX_MODE0)	/* gpmc_ben1_cle MODE0 | OUTPUT */
+//		>;
+//	};
+//};
+
+//&gpmc {
+//	status = "okay";
+//	#address-cells = <2>;
+//	#size-cells = <1>;
+
+//	pinctrl-names = "default";
+//	pinctrl-0 = <&gpmc_pins>;
+
+//	/* chip select ranges */
+//	ranges = <1 0 0x01000000 0x1000000>;
+
+//	nor {
+//		compatible = "vpbus";
+//		status = "okay";
+//		/*pinctrl-names = "default";*/
+//		/*pinctrl-0 = <&fpga_config_pins>;*/
+
+//		/*reset = <&rstctl 0 0>;*/ /* uncomment for use under Kernel 3.8.13 */
+//		/*reset-names = "eMMC_RSTn-LOGIBONE";*/ /* uncomment for use under Kernel 3.8.13 */
+
+//		reg = <1 0 0x01000000>;			/*CSn1*/
+
+//		/* CONFIG1 */
+//		bank-width = <2>;			/* GPMC_CONFIG1_DEVICESIZE(1) */
+//		/*gpmc,burst-write;*/
+//		gpmc,burst-read;
+//		gpmc,burst-wrap;
+//		gpmc,sync-read;				/* GPMC_CONFIG1_READTYPE_ASYNC */
+//		gpmc,sync-write;			/* GPMC_CONFIG1_WRITETYPE_ASYNC */
+//		gpmc,clk-activation-ns = <0>;		/* GPMC_CONFIG1_CLKACTIVATIONTIME(2) */
+//		gpmc,burst-length = <16>;		/* GPMC_CONFIG1_PAGE_LEN(2) */
+//		gpmc,mux-add-data = <2>;		/* GPMC_CONFIG1_MUXTYPE(2) */
+
+//		/* CONFIG2 */
+//		gpmc,sync-clk-ps = <20000>;
+//		gpmc,cs-on-ns = <0>;
+//		gpmc,cs-rd-off-ns = <100>;
+//		gpmc,cs-wr-off-ns = <40>;
+
+//		/* CONFIG3 */
+//		gpmc,adv-on-ns = <0>;
+//		gpmc,adv-rd-off-ns = <20>;
+//		gpmc,adv-wr-off-ns = <20>;
+
+//		/* CONFIG4 */
+//		gpmc,we-on-ns = <20>;
+//		gpmc,we-off-ns = <40>;
+//		gpmc,oe-on-ns = <20>;
+//		gpmc,oe-off-ns = <100>;
+
+//		/* CONFIG 5 */
+//		gpmc,page-burst-access-ns = <20>;
+//		gpmc,access-ns = <80>;
+//		gpmc,rd-cycle-ns = <120>;
+//		gpmc,wr-cycle-ns = <60>;
+
+//		/* CONFIG 6 */
+//		gpmc,wr-access-ns = <40>;
+//		gpmc,wr-data-mux-bus-ns = <20>;
+//		/*gpmc,bus-turnaround-ns = <40>;*/	/* CONFIG6:3:0 = 4 */
+//		/*gpmc,cycle2cycle-samecsen;*/		/* CONFIG6:7 = 1 */
+//		/*gpmc,cycle2cycle-delay-ns = <40>;*/	/* CONFIG6:11:8 = 4 */
+
+//		/* not using dma engine yet, but we can get the channel number here */
+//		dmas = <&edma 20>;
+//		dma-names = "vpbus";
+//	};
+//};
 
