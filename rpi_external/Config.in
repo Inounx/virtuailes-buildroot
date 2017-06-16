@@ -1,0 +1,4 @@
+menu "VirtuAiles"
+	source "$BR2_EXTERNAL_RPI_PATH/package/vpbus/Config.in"
+	source "$BR2_EXTERNAL_RPI_PATH/package/vpbus_test/Config.in"
+endmenu
